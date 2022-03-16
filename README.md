@@ -2,6 +2,9 @@
 
 WIP
 
+## Creative license
+- Typescript
+- Yarn
 ## Credits
 Rafi Khan
 
