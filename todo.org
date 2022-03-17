@@ -11,8 +11,13 @@ CLOCK: [2022-03-16 Wed 19:57]--[2022-03-16 Wed 20:07] =>  0:10
 :LOGBOOK:
 CLOCK: [2022-03-16 Wed 20:10]--[2022-03-16 Wed 20:12] =>  0:02
 :END:
-* TODO add unit testing library
+* DONE add unit testing library
+:LOGBOOK:
+CLOCK: [2022-03-16 Wed 20:13]--[2022-03-16 Wed 20:43] =>  0:30
+:END:
 - doing tdd
+- going to add jest, simple to use and setup
+- need to add babel in order to support typescript
 * TODO Find xml library
 * TODO fetch data from xml endpoint
 * TODO convert xml into pl format
