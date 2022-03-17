@@ -20,5 +20,9 @@
   "homepage": "https://github.com/z3t0/vehicle-info-api#readme",
   "devDependencies": {
     "typescript": "^4.6.2"
+  },
+  "dependencies": {
+    "@types/koa": "^2.13.4",
+    "koa": "^2.13.4"
   }
 }

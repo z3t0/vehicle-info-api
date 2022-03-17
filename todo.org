@@ -4,7 +4,8 @@ CLOCK: [2022-03-16 Wed 19:50]--[2022-03-16 Wed 19:57] =>  0:07
 :END:
 * TODO Create hello world koa server
 :LOGBOOK:
-CLOCK: [2022-03-16 Wed 19:57]
+CLOCK: [2022-03-16 Wed 20:07]
+CLOCK: [2022-03-16 Wed 19:57]--[2022-03-16 Wed 20:07] =>  0:10
 :END:
 * TODO Find xml library
 * TODO fetch data from xml endpoint
