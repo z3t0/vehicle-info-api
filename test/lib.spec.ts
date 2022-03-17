@@ -1,4 +1,5 @@
-import { convertXMLToJSON, getAllMakesFromXMLEndpoint, getVehicleTypesForMake } from "../src/lib";
+import { VehicleMake, VehicleTypesForMakeID } from "../src/interfaces";
+import { aggregateVehicleInformation, convertXMLToJSON, getAllMakesFromXMLEndpoint, getVehicleTypesForMake } from "../src/lib";
 
 describe("getAllMakesFromXMLEndpoint()", () => {
     test("make sure the result is not empty", async () => {
@@ -87,4 +88,42 @@ describe("getVehicleTypesForMake", () => {
         expect(typeof(item.VehicleTypeName)).toBe('string');
     });
 
+});
+
+
+describe("aggregateVehicleInformation()", () => {
+    test("with sample input, ensure output is as expected", () => {
+
+        // TODO: move sample data to constants file
+        const vehicleMake: VehicleMake = {
+            Make_ID: 440,
+            Make_Name: "ASTON MARTIN"
+        }
+
+        const vehicleTypes: VehicleTypesForMakeID[] = [
+            {
+                VehicleTypeId: 2,
+                VehicleTypeName: "Passenger Car"
+            },
+
+            {
+                VehicleTypeId: 7,
+                VehicleTypeName: "Multipurpose Passenger Vehicle (MPV)"
+            }
+        ]
+
+        const aggregate =
+            aggregateVehicleInformation(vehicleMake, vehicleTypes);
+
+        expect(aggregate).not.toBeUndefined();
+        expect(typeof(aggregate.makeId)).toBe('number');
+        expect(typeof(aggregate.makeName)).toBe('string');
+
+        // Note: We can add more extensive validation if desired.
+        //       However, this should suffice as we are generating
+        //       the data, rather than consuming from an uncontrolled
+        //       external endpoint.
+        expect(Array.isArray(aggregate.vehicleTypes)).toBeTruthy();
+
+    });
 });

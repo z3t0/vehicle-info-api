@@ -30,3 +30,15 @@ export interface VehicleTypesForMakeResponse {
         VehicleTypesForMakeIds: VehicleTypesForMakeID[];
     }
 }
+
+export interface ExpectedOutputVehicleType {
+    typeId: number;
+    typeName: string;
+}
+
+// TODO: find a better name for this type.
+export interface ExpectedOutputSingle {
+    makeId: number;
+    makeName: string;
+    vehicleTypes: ExpectedOutputVehicleType[]
+}

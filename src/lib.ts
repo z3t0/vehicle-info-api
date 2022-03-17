@@ -1,6 +1,6 @@
 import { default as axios } from "axios";
 import { XMLParser } from "fast-xml-parser"
-import { AllMakesXMLDecoded, VehicleTypesForMakeResponse } from "./interfaces";
+import { AllMakesXMLDecoded, ExpectedOutputSingle, VehicleMake, VehicleTypesForMakeID, VehicleTypesForMakeResponse } from "./interfaces";
 
 function convertXMLToJSON(xmlData: string): any {
     const parser = new XMLParser();
@@ -32,9 +32,31 @@ async function getVehicleTypesForMake(makeID: number): Promise<VehicleTypesForMa
     return response;
 }
 
+function aggregateVehicleInformation(vehicleMake: VehicleMake,
+                                     vehicleTypes: VehicleTypesForMakeID[]): ExpectedOutputSingle {
+
+    // format vehicleTypes into expected keys.
+    const formattedVehicleTypes =
+        vehicleTypes.map((vehicleType: VehicleTypesForMakeID) => ({
+            typeId: vehicleType.VehicleTypeId,
+            typeName: vehicleType.VehicleTypeName
+        }));
+
+    return {
+        makeId: vehicleMake.Make_ID,
+        makeName: vehicleMake.Make_Name,
+        vehicleTypes: formattedVehicleTypes
+    }
+
+}
+
 
 export {
+    // Library.
     getAllMakesFromXMLEndpoint,
     getVehicleTypesForMake,
+    aggregateVehicleInformation,
+
+    // Utility.
     convertXMLToJSON
 };
