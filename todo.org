@@ -32,10 +32,74 @@ CLOCK: [2022-03-16 Wed 20:44]--[2022-03-16 Wed 21:07] =>  0:23
   - which is also familiar to frontend devs
 - decided to install axios
 - added unit test to test getting xml data 
-* TODO fetch data from xml endpoint
+* DONE fetch data from xml endpoint
 - the xml data is 1MB
-* TODO convert xml into pl format
-* TODO study output format 
+- completed in previous task
+* DONE convert xml into pl format
+:LOGBOOK:
+CLOCK: [2022-03-16 Wed 21:08]--[2022-03-16 Wed 21:25] =>  0:17
+:END:
+- i want to take the xml data and convert it into something i can manipulate inside my programming language
+- this essentially means xml to json since js pl format is just json
+- the xml format from the makes endpoint, as a sample
+  #+BEGIN_SRC xml
+  <?xml version="1.0" encoding="UTF-8"?>
+  <Response xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+     <Count>10069</Count>
+     <Message>Response returned successfully</Message>
+     <Results>
+        <AllVehicleMakes>
+           <Make_ID>440</Make_ID>
+           <Make_Name>ASTON MARTIN</Make_Name>
+        </AllVehicleMakes>
+     </Results>
+  </Response>
+  #+END_SRC
+  - the format is a list of vehicles with a make_id and a make_name
+  - make_id to be used to get more information from the second endpoint
+* TODO study output format
+- studying the output format in the gist
+- we want an array like so:
+  #+BEGIN_SRC javascript
+  [
+      {
+          "makeId": "[value]",
+          "makeName": "[value]",
+          "vehicleTypes": [
+              {
+                  "typeId": "[value]",
+                  "typeName": "[value]",
+              },
+              {
+                  "typeId": "[value]",
+                  "typeName": "[value]",
+              },
+          ]
+      }
+  ]
+  #+END_SRC
+- the output for the second endpoint looks like:
+  #+BEGIN_SRC xml
+  <Response xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Count>2</Count>
+    <Message>Response returned successfully</Message>
+    <SearchCriteria>Make ID: 440</SearchCriteria>
+    <Results>
+      <VehicleTypesForMakeIds>
+        <VehicleTypeId>2</VehicleTypeId>
+        <VehicleTypeName>Passenger Car</VehicleTypeName>
+      </VehicleTypesForMakeIds>
+      <VehicleTypesForMakeIds>
+        <VehicleTypeId>7</VehicleTypeId>
+        <VehicleTypeName>Multipurpose Passenger Vehicle (MPV)</VehicleTypeName>
+      </VehicleTypesForMakeIds>
+    </Results>
+  </Response>
+  #+END_SRC
+  - the main things to note is that this is a list of items
+  - each item has a vehicle type id and a vehicle type name
+  - these are the main pieces of information we need to keep for our output data
+* TODO write function to get vehicle types for make
 * TODO write function to transform pl format to json
 * TODO create mongodb docker scripts
 * TODO store information in mongodb
@@ -51,5 +115,9 @@ CLOCK: [2022-03-16 Wed 20:44]--[2022-03-16 Wed 21:07] =>  0:23
 - update deployment
 ** TODO Add scheduled job to update data in db
 - treat the db as cache
+** TODO look into streaming xml parsing for increasing scalability
 ** TODO add unit tests for all logic functions
 ** TODO use https for security
+** TODO add linter
+** TODO move test data to constants file
+- allows for security and controls

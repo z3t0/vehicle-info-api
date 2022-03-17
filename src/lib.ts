@@ -1,4 +1,5 @@
 import { default as axios } from "axios";
+import { XMLParser } from "fast-xml-parser"
 
 async function getAllMakesFromXMLEndpoint() {
     const URL = "https://vpic.nhtsa.dot.gov/api/vehicles/getallmakes?format=XML";
@@ -8,4 +9,10 @@ async function getAllMakesFromXMLEndpoint() {
     return res.data;
 }
 
-export { getAllMakesFromXMLEndpoint };
+function convertXMLToJSON(xmlData: string): any {
+    const parser = new XMLParser();
+
+    return parser.parse(xmlData);
+}
+
+export { getAllMakesFromXMLEndpoint, convertXMLToJSON };
