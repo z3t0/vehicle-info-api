@@ -42,3 +42,5 @@ export interface ExpectedOutputSingle {
     makeName: string;
     vehicleTypes: ExpectedOutputVehicleType[]
 }
+
+export type ExpectedOutput = ExpectedOutputSingle[];

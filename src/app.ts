@@ -1,5 +1,6 @@
 import { default as Koa } from "koa";
 import { default as KoaJson} from "koa-json";
+import * as Lib from "./lib";
 
 
 const app = new Koa();
@@ -9,13 +10,17 @@ const app = new Koa();
 app.use(KoaJson());
 
 // response
-app.use(ctx => {
+app.use(async (ctx) => {
     console.log("received request");
-    ctx.body = {message: 'Hello Koa'};
+
+    const aggregate =
+        await Lib.fetchAndGenerateAggregateForAllVehicles();
+
+    ctx.body = aggregate;
 });
 
 
-function start() {
+async function start() {
     app.listen(3000);
     console.log("server started on port 3000");
 }

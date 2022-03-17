@@ -99,17 +99,24 @@ CLOCK: [2022-03-16 Wed 21:08]--[2022-03-16 Wed 21:25] =>  0:17
   - the main things to note is that this is a list of items
   - each item has a vehicle type id and a vehicle type name
   - these are the main pieces of information we need to keep for our output data
-* TODO convert into output format [0/1]
-** TODO write a function where given an input for a single make:
+* TODO convert into output format [2/2]
+** DONE write a function where given an input for a single make:
   - all makes item result: VehicleMake
   - vehicle types for make: VehicleTypesForMakeID
   - return the expected output: ExpectedOutputSingle
+** DONE write a function to convert the whole collection
+- little hard to test bc running on the whole collection takes a while
+- this is done but testing it is a bit slow for now
+- I need to add throttling else we are spawning too many requests
 * DONE write function to get vehicle types for make
 :LOGBOOK:
 CLOCK: [2022-03-16 Wed 21:41]--[2022-03-16 Wed 21:56] =>  0:15
 :END:
 - added function
 - added test
+* TODO Tune performance
+- the issue is that our all vehicles function is spawning too many requests
+- throttling will solve this problem
 * TODO create mongodb docker scripts
 * TODO store information in mongodb
 * TODO expose api

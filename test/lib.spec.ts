@@ -1,5 +1,5 @@
 import { VehicleMake, VehicleTypesForMakeID } from "../src/interfaces";
-import { aggregateVehicleInformation, convertXMLToJSON, getAllMakesFromXMLEndpoint, getVehicleTypesForMake } from "../src/lib";
+import { aggregateVehicleInformation, convertXMLToJSON, fetchAndGenerateAggregateForAllVehicles, getAllMakesFromXMLEndpoint, getVehicleTypesForMake } from "../src/lib";
 
 describe("getAllMakesFromXMLEndpoint()", () => {
     test("make sure the result is not empty", async () => {
@@ -127,3 +127,19 @@ describe("aggregateVehicleInformation()", () => {
 
     });
 });
+
+// TODO: Fix this test, it is too slow at the moment
+//       I have manually confirmed it works, but we need an automated test.
+// describe("fetchAndGenerateAggregateForAllVehicles()", () => {
+//     test("ensure output is an array", async () => {
+//         jest.setTimeout(30000);
+//         expect.assertions(2);
+
+//         const aggregate =
+//             await fetchAndGenerateAggregateForAllVehicles();
+
+//         expect(aggregate).not.toBeUndefined();
+//         expect(Array.isArray(aggregate)).toBeTruthy();
+
+//     });
+// });

@@ -1,6 +1,6 @@
 import { default as axios } from "axios";
 import { XMLParser } from "fast-xml-parser"
-import { AllMakesXMLDecoded, ExpectedOutputSingle, VehicleMake, VehicleTypesForMakeID, VehicleTypesForMakeResponse } from "./interfaces";
+import { AllMakesXMLDecoded, ExpectedOutput, ExpectedOutputSingle, VehicleMake, VehicleTypesForMakeID, VehicleTypesForMakeResponse } from "./interfaces";
 
 function convertXMLToJSON(xmlData: string): any {
     const parser = new XMLParser();
@@ -47,7 +47,46 @@ function aggregateVehicleInformation(vehicleMake: VehicleMake,
         makeName: vehicleMake.Make_Name,
         vehicleTypes: formattedVehicleTypes
     }
+}
 
+async function fetchAndGenerateAggregateForAllVehicles() :
+Promise <ExpectedOutput> {
+    console.log("getting makes");
+    const makesInfo = await getAllMakesFromXMLEndpoint();
+
+    const makes = makesInfo.Results.AllVehicleMakes;
+
+    // TODO: use Promises.all for scaling
+    // TODO: consider request throttling to prevent
+    //       DDOS or overloading the network.
+
+    console.log("processing makes");
+
+    // TODO: remove the limitedMakes, it should process all
+    //       the makes
+    const limitedMakes = makes.slice(0,3);
+
+    const expectedOutput = limitedMakes.map(async (make) => {
+        // Fetch vehicle types for make.
+        console.log("fetching vehicle types");
+        const vehicleTypes = await getVehicleTypesForMake(make.Make_ID);
+
+
+        console.log("aggregating");
+        const aggregate =  aggregateVehicleInformation(
+            make,
+            vehicleTypes.Results.VehicleTypesForMakeIds);
+
+        console.log("promise resolved for make=" + make.Make_ID);
+
+        return aggregate;
+    })
+
+    console.log("before promise all resolved");
+    const res = Promise.all(expectedOutput);
+    console.log("promise all resolved");
+
+    return res;
 }
 
 
@@ -56,6 +95,9 @@ export {
     getAllMakesFromXMLEndpoint,
     getVehicleTypesForMake,
     aggregateVehicleInformation,
+
+    // API.
+    fetchAndGenerateAggregateForAllVehicles,
 
     // Utility.
     convertXMLToJSON
