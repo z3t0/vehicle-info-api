@@ -121,3 +121,4 @@ CLOCK: [2022-03-16 Wed 21:08]--[2022-03-16 Wed 21:25] =>  0:17
 ** TODO add linter
 ** TODO move test data to constants file
 - allows for security and controls
+** TODO Add xml api endpoint data validation against defined schema

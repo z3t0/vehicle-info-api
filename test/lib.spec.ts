@@ -12,6 +12,29 @@ describe("getAllMakesFromXMLEndpoint()", () => {
 
         expect(res).not.toBeUndefined();
     });
+
+    test("make sure the result conforms to the expected format", async () => {
+        // increase time out because we are doing a network
+        // request.
+        jest.setTimeout(30000);
+        
+        expect.assertions(8);
+
+        const res = await getAllMakesFromXMLEndpoint();
+
+        expect(res).not.toBeUndefined();
+        expect(res.Count).not.toBeUndefined();
+        expect(res.Count).toBeGreaterThan(0);
+        expect(res.Results).not.toBeUndefined();
+        expect(res.Results.AllVehicleMakes).not.toBeUndefined();
+        expect(Array.isArray(res.Results.AllVehicleMakes))
+            .toBeTruthy();
+
+        // Check one of the items
+        const item = res.Results.AllVehicleMakes[0];
+        expect (typeof (item.Make_ID)).toBe('number');
+        expect (typeof (item.Make_Name)).toBe('string');
+    });
 });
 
 describe("convertXMLToJSON", () => {
@@ -33,8 +56,6 @@ describe("convertXMLToJSON", () => {
         
 
         const parsed = convertXMLToJSON(sampleData);
-
-        console.log(JSON.stringify(parsed));
        
         expect(parsed).not.toBeUndefined();
     });
