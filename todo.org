@@ -2,11 +2,17 @@
 LOGBOOK:
 CLOCK: [2022-03-16 Wed 19:50]--[2022-03-16 Wed 19:57] =>  0:07
 :END:
-* TODO Create hello world koa server
+* DONE Create hello world koa server
 :LOGBOOK:
-CLOCK: [2022-03-16 Wed 20:07]
+CLOCK: [2022-03-16 Wed 20:07]--[2022-03-16 Wed 20:09] =>  0:02
 CLOCK: [2022-03-16 Wed 19:57]--[2022-03-16 Wed 20:07] =>  0:10
 :END:
+* DONE return json in koa
+:LOGBOOK:
+CLOCK: [2022-03-16 Wed 20:10]--[2022-03-16 Wed 20:12] =>  0:02
+:END:
+* TODO add unit testing library
+- doing tdd
 * TODO Find xml library
 * TODO fetch data from xml endpoint
 * TODO convert xml into pl format
