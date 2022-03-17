@@ -1,4 +1,4 @@
-import { convertXMLToJSON, getAllMakesFromXMLEndpoint } from "../src/lib";
+import { convertXMLToJSON, getAllMakesFromXMLEndpoint, getVehicleTypesForMake } from "../src/lib";
 
 describe("getAllMakesFromXMLEndpoint()", () => {
     test("make sure the result is not empty", async () => {
@@ -59,4 +59,32 @@ describe("convertXMLToJSON", () => {
        
         expect(parsed).not.toBeUndefined();
     });
+});
+
+describe("getVehicleTypesForMake", () => {
+    test("ensure the format is as expected", async () => {
+
+        expect.assertions(9);
+
+        const makeID = 440;
+
+        const res = await getVehicleTypesForMake(makeID);
+
+        expect(res).not.toBeUndefined();
+        expect(res.Count).not.toBeUndefined();
+        expect(res.Count).toBeGreaterThan(0);
+        expect(res.SearchCriteria).not.toBeUndefined();
+        expect(res.Results).not.toBeUndefined();
+        expect(res.Results.VehicleTypesForMakeIds).not.toBeUndefined();
+
+        expect(Array.isArray(res.Results.VehicleTypesForMakeIds))
+            .toBeTruthy()
+
+        // Check one of the items
+        const item = res.Results.VehicleTypesForMakeIds[0];
+
+        expect(typeof(item.VehicleTypeId)).toBe('number');
+        expect(typeof(item.VehicleTypeName)).toBe('string');
+    });
+
 });

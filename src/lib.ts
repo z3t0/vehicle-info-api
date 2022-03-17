@@ -1,6 +1,6 @@
 import { default as axios } from "axios";
 import { XMLParser } from "fast-xml-parser"
-import { AllMakesXMLDecoded } from "./interfaces";
+import { AllMakesXMLDecoded, VehicleTypesForMakeResponse } from "./interfaces";
 
 function convertXMLToJSON(xmlData: string): any {
     const parser = new XMLParser();
@@ -20,4 +20,21 @@ async function getAllMakesFromXMLEndpoint(): Promise<AllMakesXMLDecoded> {
     return response;
 }
 
-export { getAllMakesFromXMLEndpoint, convertXMLToJSON };
+
+async function getVehicleTypesForMake(makeID: number): Promise<VehicleTypesForMakeResponse> {
+    const URL = `https://vpic.nhtsa.dot.gov/api/vehicles/GetVehicleTypesForMakeId/${makeID}?format=xml`
+
+    const res = await axios.get(URL);
+
+    const decoded = convertXMLToJSON(res.data);
+    const response = decoded.Response as VehicleTypesForMakeResponse;
+
+    return response;
+}
+
+
+export {
+    getAllMakesFromXMLEndpoint,
+    getVehicleTypesForMake,
+    convertXMLToJSON
+};
