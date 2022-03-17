@@ -1,0 +1,28 @@
+* DONE add typescript
+LOGBOOK:
+CLOCK: [2022-03-16 Wed 19:50]--[2022-03-16 Wed 19:57] =>  0:07
+:END:
+* TODO Create hello world koa server
+:LOGBOOK:
+CLOCK: [2022-03-16 Wed 19:57]
+:END:
+* TODO Find xml library
+* TODO fetch data from xml endpoint
+* TODO convert xml into pl format
+* TODO study output format 
+* TODO write function to transform pl format to json
+* TODO create mongodb docker scripts
+* TODO store information in mongodb
+* TODO expose api
+* TODO package into docker compose
+* TODO test docker compose version
+* EXTRA
+** TODO deploy to a hosted site
+** TODO add ci
+- build, test, push image
+** TODO add cd
+- pull new image
+- update deployment
+** TODO Add scheduled job to update data in db
+- treat the db as cache
+** TODO add unit tests for all logic functions
