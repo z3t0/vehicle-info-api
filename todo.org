@@ -18,8 +18,22 @@ CLOCK: [2022-03-16 Wed 20:13]--[2022-03-16 Wed 20:43] =>  0:30
 - doing tdd
 - going to add jest, simple to use and setup
 - need to add babel in order to support typescript
-* TODO Find xml library
+* DONE Find xml library
+:LOGBOOK:
+CLOCK: [2022-03-16 Wed 20:44]--[2022-03-16 Wed 21:07] =>  0:23
+:END:
+- good xml library that is maintained by the community: https://www.npmjs.com/package/fast-xml-parser
+- write test code to fetch the xml and parse it into json
+- just make sure there are no errors and the parsing is successful
+- logic will be implemented in another commit
+- adding http library instead of using the built in node because this will lead to more maintainable code
+- experience with the node http library based local implementations is that everyone writes a slightly different API
+- much better to use the community maintained axios
+  - which is also familiar to frontend devs
+- decided to install axios
+- added unit test to test getting xml data 
 * TODO fetch data from xml endpoint
+- the xml data is 1MB
 * TODO convert xml into pl format
 * TODO study output format 
 * TODO write function to transform pl format to json
@@ -38,3 +52,4 @@ CLOCK: [2022-03-16 Wed 20:13]--[2022-03-16 Wed 20:43] =>  0:30
 ** TODO Add scheduled job to update data in db
 - treat the db as cache
 ** TODO add unit tests for all logic functions
+** TODO use https for security

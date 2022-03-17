@@ -4,12 +4,11 @@
   "description": "WIP",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "build": "tsc",
     "typecheck": "tsc --noEmit",
     "typecheck:watch": "yarn typecheck -w",
     "start": "node build/index.js",
-    "test": "jest",
     "test:watch": "jest --watch"
   },
   "repository": {
@@ -34,6 +33,8 @@
     "typescript": "^4.6.2"
   },
   "dependencies": {
+    "axios": "^0.26.1",
+    "fast-xml-parser": "^4.0.6",
     "koa": "^2.13.4",
     "koa-json": "^2.0.2"
   }
